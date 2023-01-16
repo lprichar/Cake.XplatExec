@@ -7,4 +7,7 @@
   <ItemGroup>
     <PackageReference Include="Cake.Frosting" Version="3.0.0" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Cake.XplatExec\Cake.XplatExec\Cake.XplatExec.csproj" />
+  </ItemGroup>
 </Project>
