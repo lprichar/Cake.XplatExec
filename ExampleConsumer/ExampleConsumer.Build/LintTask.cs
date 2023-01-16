@@ -2,6 +2,7 @@
 using Cake.Core;
 using Cake.Core.IO;
 using Cake.Frosting;
+using Cake.XplatExec;
 
 [TaskName("Lint")]
 public class LintTask : FrostingTask<BuildContext>

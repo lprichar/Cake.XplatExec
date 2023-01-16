@@ -4,10 +4,11 @@ using Cake.Core.IO;
 using Cake.Core.IO.Arguments;
 using Cake.Frosting;
 
-public static class XplatExecClass
+namespace Cake.XplatExec;
+
+public static class XplatExecHelper
 {
     // todo: 1. Extract Interface
-    // 2. move to other file
     public static void XplatExec(this FrostingContext context, string cmd, ProcessArgumentBuilder processArgumentBuilder)
     {
         using var process = XplatExec(context, cmd, new ProcessSettings { Arguments = processArgumentBuilder });
@@ -21,7 +22,7 @@ public static class XplatExecClass
         }
     }
 
-    private static IProcess XplatExec(FrostingContext context, string cmd, ProcessSettings settings)
+    private static IProcess XplatExec(IFrostingContext context, string cmd, ProcessSettings settings)
     {
         if (context.IsRunningOnWindows())
         {
@@ -34,7 +35,7 @@ public static class XplatExecClass
         return context.StartAndReturnProcess(cmd, settings);
     }
 
-    public static FilePath XplatFindRuntimeFor(this FrostingContext context, FilePath executableFile)
+    public static FilePath XplatFindRuntimeFor(this IFrostingContext context, FilePath executableFile)
     {
         var executableFileName = executableFile.GetFilename();
         var fileNameWithoutExtension = executableFileName.GetFilename().GetFilenameWithoutExtension();
@@ -49,7 +50,7 @@ public static class XplatExecClass
         }
     }
 
-    private static FilePath GetRuntimeConfig(FrostingContext context)
+    private static FilePath GetRuntimeConfig(IFrostingContext context)
     {
         if (context.IsRunningOnLinux())
         {
@@ -61,4 +62,3 @@ public static class XplatExecClass
         }
     }
 }
-
